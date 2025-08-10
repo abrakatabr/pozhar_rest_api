@@ -3,11 +3,15 @@ package ru.pozhar.pozhar_rest_api.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 
 @Entity
 @Table(name = "users")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +29,6 @@ public class User {
     @NotBlank
     private String password;
 
-    @Pattern(regexp = "USER|ADMIN", message = "Role must be USER or ADMIN")
-    @Column(length = 10)
+    @Column(columnDefinition = "VARCHAR(10) CHECK (role in ('USER', 'ADMIN')) NOT NULL DEFAULT 'USER'")
     private String role;
 }
