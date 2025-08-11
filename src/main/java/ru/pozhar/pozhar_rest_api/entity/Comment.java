@@ -8,28 +8,29 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "projects")
+@Table(name = "comments")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Project {
-
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Column(nullable = false)
-    private String name;
-
-    private String description;
+    @Column(nullable = false, length = 500)
+    private String text;
 
     @CreatedDate
     private LocalDateTime createdAt;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User createdBy;
+    @JoinColumn(name = "author_id", nullable = false)
+    private User author;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "task_id", nullable = false)
+    private Task task;
 }
