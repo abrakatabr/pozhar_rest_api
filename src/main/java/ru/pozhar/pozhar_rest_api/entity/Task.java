@@ -29,13 +29,13 @@ public class Task {
     @Column(nullable = false)
     private String description;
 
-    @Column(columnDefinition = "VARCHAR(15) CHECK (status in ('TODO', 'IN_PROGRESS', 'DONE'))"
-            + " NOT NULL DEFAULT 'TODO'")
-    private String status;
+    @Column(length = 15, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.TODO;
 
-    @Column(columnDefinition = "VARCHAR(15) CHECK (priority in ('LOW', 'MEDIUM', 'HIGH'))" +
-            " NOT NULL DEFAULT 'LOW'")
-    private String priority;
+    @Column(length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Priority priority = Priority.LOW;
 
     @CreatedDate
     @Column(updatable = false)

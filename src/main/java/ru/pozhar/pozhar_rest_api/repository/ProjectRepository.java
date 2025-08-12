@@ -13,7 +13,4 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Transactional
     @Override
     void deleteById(Long id);
-
-    @Transactional
-    void updateProjectById(Project project, Long id);
 }

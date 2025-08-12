@@ -17,9 +17,4 @@ public interface UserRepository extends JpaRepository<User, Long>{
     @Transactional
     @Override
     void deleteById(Long id);
-
-    @Transactional
-    User updateUserById(Long id);
-
-
 }

@@ -1,10 +1,11 @@
 package ru.pozhar.pozhar_rest_api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.pozhar.pozhar_rest_api.entity.Task;
-import ru.pozhar.pozhar_rest_api.entity.User;
 
 import java.util.List;
 
@@ -19,11 +20,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Override
     void deleteById(Long id);
 
-    @Transactional
-    void updateStatusById(String status, Long id);
-
-    @Transactional
-    void updateAssigneeById(User assignee, Long id);
-
-    List<Task> findByProject(Long project_id);
+    @Query(value = "SELECT * FROM tasks t WHERE t.project_id = :id", nativeQuery = true)
+    List<Task> findByProjectId(@Param("id") Long project_id);
 }

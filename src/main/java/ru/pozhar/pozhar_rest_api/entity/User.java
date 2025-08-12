@@ -29,6 +29,7 @@ public class User {
     @NotBlank
     private String password;
 
-    @Column(columnDefinition = "VARCHAR(10) CHECK (role in ('USER', 'ADMIN')) NOT NULL DEFAULT 'USER'")
-    private String role;
+    @Column(length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
 }
